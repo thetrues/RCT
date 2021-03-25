@@ -175,12 +175,7 @@ public class ChatActivity extends AppCompatActivity implements MqttCallback {
                             messageModelList.add(new MessageModel(ms.getString("id"), ms.getString("messengerId"), ms.getString("senderId"),
                                     ms.getString("receiverId"), ms.getString("message"), ms.getLong("time"), ms.getBoolean("readStatus")));
                         }
-                      /*  Log.d("onResponse: ", messageModelList.toString());
-                        Set<MessageModel> set = new HashSet<>(messageModelList);
-                        messageModelList.clear();
-                        messageModelList.addAll(set);
 
-*/
                         Log.d("onResponse: ", messageModelList.toString());
                      /*  Collections.sort(messageModelList, (messageModel, t1) -> {
                             String one = String.valueOf(messageModel.getTime());

@@ -12,6 +12,10 @@ import com.rct.models.QuoteModel;
 import com.rct.models.UserModel;
 import com.rct.models.VarietyVar;
 
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -208,6 +212,7 @@ public class DataApi {
         object.put("supply_price", Integer.parseInt(price));
         object.put("supply_pickup_location", location);
         object.put("supply_details", details);
+        Log.d("SendQuote: ", object.toString());
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, String.valueOf(object));
         Request request = new Request.Builder()
@@ -229,6 +234,7 @@ public class DataApi {
         });*/
 
         Response response = client.newCall(request).execute();
+        Log.d("SendQuote: ", response.body().string());
         return response.code();
     }
 
@@ -367,6 +373,50 @@ public class DataApi {
         }
 
         return varietyVars;
+    }
+
+    public static void MqttSub(Context context, String quote_id){
+        try {
+            MqttClient client = new MqttClient(Vars.MQTT_BROKER_ADDR, MqttClient.generateClientId(), new MemoryPersistence());
+            client.connect();
+            client.setCallback((MqttCallback) context);
+            client.subscribe(quote_id);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static QuoteModel getQuote(String quoteId, String token){
+        OkHttpClient client = new OkHttpClient();
+        QuoteModel model = new QuoteModel();
+        Request request = new Request.Builder()
+                .url(Api.main_url+"/api/v1/quote/seller")
+                .addHeader("Authorization", "Bearer "+token)
+                .get()
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            String data = response.body().string();
+            JSONObject object = new JSONObject(data);
+            JSONArray array = object.getJSONArray("data");
+            for (int i=0; i<array.length(); i++){
+                JSONObject o = array.getJSONObject(i);
+                if (o.getString("id").equals(quoteId)) {
+                    model.setId(o.getString("id"));
+                    model.setTender_id(o.getString("tender_id"));
+                    model.setSeller_id(o.getString("seller_id"));
+                    model.setSupply_details(o.getString("supply_details"));
+                    model.setSupply_quantity(o.getInt("supply_quantity"));
+                    model.setSupply_price(o.getInt("supply_price"));
+                    model.setActive(o.getInt("active"));
+                }
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
     }
 
 

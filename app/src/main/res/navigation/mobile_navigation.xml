@@ -12,10 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_prices"
+        android:name="com.rct.pages.PricesFragment"
+        android:label="Prices"
+        tools:layout="@layout/fragment_prices" />
+
+    <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.rct.pages.ChatFragment"
+        android:name="com.rct.pages.ChatAllFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat_all" />
 
     <fragment
         android:id="@+id/navigation_notifications"

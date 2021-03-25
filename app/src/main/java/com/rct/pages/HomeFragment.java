@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,9 @@ import com.rct.adapter.SellersAdapter;
 import com.rct.adapter.TenderRecyclerAdapter;
 import com.rct.database.UserPreference;
 import com.rct.databinding.FragmentHomeBinding;
+import com.rct.fragments.GiveTender;
+import com.rct.fragments.SendQuote;
+import com.rct.fragments.TenderRequest;
 import com.rct.models.BuyerModel;
 import com.rct.models.PlatformModel;
 import com.rct.models.SellerModel;
@@ -42,6 +46,7 @@ import com.rct.platform.PlatformActivity;
 import com.rct.utils.Api;
 import com.rct.utils.DataApi;
 import com.rct.utils.Tools;
+import com.rct.utils.ViewAnimation;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -50,13 +55,18 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.rct.utils.Tools.toggleArrow;
 
 
 public class HomeFragment extends Fragment {
@@ -108,6 +118,7 @@ public class HomeFragment extends Fragment {
     AlertDialog dialog;
     ProgressDialog progressDialog;
     String variety;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -120,6 +131,7 @@ public class HomeFragment extends Fragment {
         client = new OkHttpClient();
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading ...");
+
 
         if (userPreference.getSeller()) {
             getRecentRequest();
@@ -139,12 +151,48 @@ public class HomeFragment extends Fragment {
 
         }
 
+        binding.lytExpandText.setVisibility(View.GONE);
+        binding.lytExpandText2.setVisibility(View.GONE);
+        binding.lytExpandText3.setVisibility(View.GONE);
+        binding.btToggleText.setOnClickListener(view -> toggleSectionText(binding.btToggleText));
+        binding.btToggleText2.setOnClickListener(view -> toggleSectionText2(binding.btToggleText2));
+        binding.btToggleText3.setOnClickListener(view -> toggleSectionText3(binding.btToggleText3));
+    }
+
+    private void toggleSectionText(View view) {
+        boolean show = toggleArrow(view);
+        if (show) {
+            ViewAnimation.expand(binding.lytExpandText, () -> Tools.nestedScrollTo(binding.nestScrol, binding.lytExpandText));
+        } else {
+            ViewAnimation.collapse(binding.lytExpandText);
+        }
+    }
+
+    private void toggleSectionText2(View view) {
+        boolean show = toggleArrow(view);
+        if (show) {
+            ViewAnimation.expand(binding.lytExpandText2, () -> Tools.nestedScrollTo(binding.nestScrol, binding.lytExpandText2));
+        } else {
+            ViewAnimation.collapse(binding.lytExpandText2);
+        }
+    }
+
+    private void toggleSectionText3(View view) {
+        boolean show = toggleArrow(view);
+        if (show) {
+            ViewAnimation.expand(binding.lytExpandText3, () -> Tools.nestedScrollTo(binding.nestScrol, binding.lytExpandText3));
+        } else {
+            ViewAnimation.collapse(binding.lytExpandText3);
+        }
     }
 
 
     public void getSellers() {
         progressDialog.show();
         Request request = new Request.Builder()
+                .cacheControl(new CacheControl.Builder()
+                        .maxStale(60, TimeUnit.MINUTES)
+                        .build())
                 .url(Api.main_url + Api.sellers)
                 .get()
                 .build();
@@ -280,7 +328,11 @@ public class HomeFragment extends Fragment {
         dialog.findViewById(R.id.bt_close).setOnClickListener(view -> dialog.dismiss());
         dialog.findViewById(R.id.giveTender).setOnClickListener((View.OnClickListener) view -> {
             if (userPreference.getLoggedIn() && userPreference.getBuyer()) {
-                GiveTender(model);
+               // GiveTender(model);
+                GiveTender giveTender = new GiveTender();
+                giveTender.setSellerModel(model);
+                giveTender.setUserPreference(userPreference);
+                giveTender.show(getChildFragmentManager(), giveTender.getTag());
                 dialog.dismiss();
             } else {
                 Login();
@@ -339,7 +391,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
         tenderDialog.findViewById(R.id.giveTender).setOnClickListener(view -> {
             String quantity = ((EditText) tenderDialog.findViewById(R.id.quantity)).getText().toString().trim();
             String pickup = ((EditText) tenderDialog.findViewById(R.id.location)).getText().toString().trim();
@@ -364,16 +415,14 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), "Fill all inputs", Toast.LENGTH_SHORT).show();
                     ((EditText) tenderDialog.findViewById(R.id.quantity)).setError("Please add quantity");
                 }
-
-
                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-
                 tenderDialog.dismiss();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         });
+        tenderDialog.findViewById(R.id.bt_close).setOnClickListener(view -> tenderDialog.dismiss());
         tenderDialog.create();
         tenderDialog.show();
     }
@@ -411,10 +460,16 @@ public class HomeFragment extends Fragment {
                                     String.valueOf(o.getLong("grade")), o.getString("variety"),
                                     "","", "", "", o.getString("created_time")));
                         }
-
+                        Collections.reverse(tenderModels);
                         tenderRecyclerAdapter = new TenderRecyclerAdapter(getActivity(), tenderModels);
                         binding.tenderRecycler.setAdapter(tenderRecyclerAdapter);
-                        tenderRecyclerAdapter.setOnTenderClick(model -> ReviewTender(model));
+                        tenderRecyclerAdapter.setOnTenderClick(model -> {
+                           // ReviewTender(model);
+                            SendQuote sendQuote = new SendQuote();
+                            sendQuote.setTenderModel(model);
+                            sendQuote.setUserPreference(userPreference);
+                            sendQuote.show(getChildFragmentManager(), sendQuote.getTag());
+                        });
 
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -460,7 +515,13 @@ public class HomeFragment extends Fragment {
 
                     buyerRecyclerAdapter = new BuyerRecyclerAdapter(getContext(), buyerModels);
                     binding.buyersRecycler.setAdapter(buyerRecyclerAdapter);
-                    buyerRecyclerAdapter.setOnBuyerClick(model -> RequestTenderBuyer(model));
+                    buyerRecyclerAdapter.setOnBuyerClick(model -> {
+                       // RequestTenderBuyer(model);
+                        TenderRequest fragment = new TenderRequest();
+                        fragment.setBuyerModel(model);
+                        fragment.setUserPreference(userPreference);
+                        fragment.show(getChildFragmentManager(), fragment.getTag());
+                    });
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -537,6 +598,7 @@ public class HomeFragment extends Fragment {
         View req = getLayoutInflater().inflate(R.layout.buyer_dialog, null);
         bu.setView(req);
          Spinner vr = req.findViewById(R.id.spinnerVariety);
+        ((ImageButton) req.findViewById(R.id.bt_close)).setOnClickListener((View.OnClickListener) view -> dialog.dismiss());
 
         String[] grades = {"grade 1", "grade 2", "grade 3"};
         String[] cert = {"certified", "not certified"};

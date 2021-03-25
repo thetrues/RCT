@@ -53,6 +53,7 @@ public class PlatformActivity extends AppCompatActivity {
     UserPreference userPreference;
     StringBuilder sellers;
     List<String> sellerIds;
+    String variety;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -248,6 +249,7 @@ public class PlatformActivity extends AppCompatActivity {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         Spinner gr = tenderDialog.findViewById(R.id.spinnerGrade);
+        Spinner vr = tenderDialog.findViewById(R.id.spinnerVariety);
         String[] grade = {"1", "2", "3"};
         ((TextView) tenderDialog.findViewById(R.id.names)).setText(String.format("Give %s Sellers Tender", ids.size()));
 
@@ -265,49 +267,63 @@ public class PlatformActivity extends AppCompatActivity {
             }
         });
 
-        tenderDialog.findViewById(R.id.giveTender).setOnClickListener(view -> {
-            String quantity = ((EditText) tenderDialog.findViewById(R.id.quantity)).getText().toString().trim();
-            String pickup = ((EditText) tenderDialog.findViewById(R.id.location)).getText().toString().trim();
-            String variety = ((EditText) tenderDialog.findViewById(R.id.variety)).getText().toString().trim();
-            Log.d("onClick: ", gradeSelected);
-            JSONObject object = new JSONObject();
-            try {
-
-
-                JSONArray array = new JSONArray();
-                for (int i = 0; i < ids.size(); i++) {
-                    JSONObject usd = new JSONObject();
-                    usd.put("id", ids.get(i));
-                    array.put(usd);
-                }
-
-                JSONObject seller_selection = new JSONObject();
-                seller_selection.put("seller_id", array);
-                object.put("quantity", quantity);
-                object.put("grade", gradeSelected);
-                object.put("location", pickup);
-                object.put("variety", variety);
-                object.put("seller_selection", seller_selection);
-                Log.d("onClick1: ", object.toString());
-                if (!quantity.isEmpty() && !variety.isEmpty() && !pickup.isEmpty()){
-                    if (userPreference.getLoggedIn()) {
-                        DataApi.GiveTender(object, this, userPreference.getToken());
-                        Log.d("GiveTenderMany: ", object.toString());
-                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Login();
-                    }
-                }else {
-                    Toast.makeText(this, "Fill all inputs", Toast.LENGTH_SHORT).show();
-                    ((EditText) tenderDialog.findViewById(R.id.quantity)).setError("Please add quantity");
-                }
-
-                tenderDialog.dismiss();
-            } catch (JSONException e) {
-                e.printStackTrace();
+        ArrayAdapter<String> varietyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DataApi.getVariety(this));
+        vr.setAdapter(varietyAdapter);
+        vr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                variety = DataApi.getVariety(getApplicationContext()).get(i);
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
+
+
+
+            tenderDialog.findViewById(R.id.giveTender).setOnClickListener(view -> {
+                String quantity = ((EditText) tenderDialog.findViewById(R.id.quantity)).getText().toString().trim();
+                String pickup = ((EditText) tenderDialog.findViewById(R.id.location)).getText().toString().trim();
+                Log.d("onClick: ", gradeSelected);
+                JSONObject object = new JSONObject();
+                try {
+                    JSONArray array = new JSONArray();
+                    for (int i = 0; i < ids.size(); i++) {
+                        JSONObject usd = new JSONObject();
+                        usd.put("id", ids.get(i));
+                        array.put(usd);
+                    }
+
+                    JSONObject seller_selection = new JSONObject();
+                    seller_selection.put("seller_id", array);
+                    object.put("quantity", quantity);
+                    object.put("grade", gradeSelected);
+                    object.put("location", pickup);
+                    object.put("variety", variety);
+                    object.put("seller_selection", seller_selection);
+                    Log.d("onClick1: ", object.toString());
+                    if (!quantity.isEmpty() && !variety.isEmpty() && !pickup.isEmpty()) {
+                        if (userPreference.getLoggedIn()) {
+                            DataApi.GiveTender(object, this, userPreference.getToken());
+                            Log.d("GiveTenderMany: ", object.toString());
+                            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Login();
+                        }
+                    } else {
+                        Toast.makeText(this, "Fill all inputs", Toast.LENGTH_SHORT).show();
+                        ((EditText) tenderDialog.findViewById(R.id.quantity)).setError("Please add quantity");
+                    }
+
+                    tenderDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            });
+
         tenderDialog.create();
         tenderDialog.show();
     }

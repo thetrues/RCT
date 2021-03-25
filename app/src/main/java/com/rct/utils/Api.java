@@ -21,6 +21,7 @@ public class Api {
     public static final String get_recent_tender = "/api/v1/seller/tender-given";
     public static final String get_send_quote = "/api/v1/quote/tender/";
     public static final String seller_request_tender = "/api/v1/seller/tender";
+    public static final String get_all_messages = "/api/v1/messenger";
 
 
 

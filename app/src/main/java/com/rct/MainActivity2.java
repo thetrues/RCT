@@ -30,8 +30,8 @@ public class MainActivity2 extends AppCompatActivity {
             CheckUserRole();
         }
         DataApi.GetVarietyServer(getApplicationContext());
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_chat, R.id.navigation_notifications, R.id.navigation_account)
+       AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_prices, R.id.navigation_chat, R.id.navigation_notifications, R.id.navigation_account)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
      //   NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

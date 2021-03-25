@@ -73,13 +73,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinnerVariety"
             android:layout_weight="1"
-            app:hintText="Select Variety"/>
+            app:hintText="Variety"/>
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/spinnerGrade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:hintText="Select Grade"
+                app:hintText="Grade"
                 android:layout_weight="1" />
 
 
