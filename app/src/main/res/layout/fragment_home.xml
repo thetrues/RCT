@@ -79,7 +79,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="1. Give Tender"
+                            android:text="@string/_1_give_tender"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/grey_80" />
 
@@ -103,7 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_large"
-                            android:text="A formal, structured procedure for generating competing offers from different potential suppliers or contractors looking to obtain an award of business activity in works, supply. " />
+                            android:text="@string/a_formal_structured_procedure_for_generating_competing_offers_from_different_potential_suppliers_or_contractors_looking_to_obtain_an_award_of_business_activity_in_works_supply" />
 
                         <View
                             android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="2. Request Tender"
+                            android:text="@string/_2_request_tender"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/grey_80" />
 
@@ -173,7 +173,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_large"
-                            android:text="A formal, structured procedure for generating competing offers from different potential suppliers or contractors looking to obtain an award of business activity in works, supply. " />
+                            android:text="@string/a_formal_structured_procedure_for_generating_competing_offers_from_different_potential_suppliers_or_contractors_looking_to_obtain_an_award_of_business_activity_in_works_supply" />
 
                         <View
                             android:layout_width="match_parent"
@@ -219,7 +219,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="3. Price Rate"
+                            android:text="@string/_3_price_rate"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/grey_80" />
 
@@ -243,7 +243,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_large"
-                            android:text="A formal, structured procedure for generating competing offers from different potential suppliers or contractors looking to obtain an award of business activity in works, supply. " />
+                            android:text="@string/a_formal_structured_procedure_for_generating_competing_offers_from_different_potential_suppliers_or_contractors_looking_to_obtain_an_award_of_business_activity_in_works_supply" />
 
                         <View
                             android:layout_width="match_parent"
@@ -261,7 +261,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="Recent Tender Request"
+                android:text="@string/recent_tender_request"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -274,7 +274,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="Shop by Sellers"
+                android:text="@string/shop_by_sellers"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -287,7 +287,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="Buyers"
+                android:text="@string/buyers"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -300,7 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="Shop by Cluster"
+                android:text="@string/shop_by_cluster"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView

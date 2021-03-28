@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:minHeight="?attr/actionBarSize"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/image"
@@ -45,8 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing_middle"
-                    android:layout_marginRight="@dimen/spacing_middle"
-                    android:text="People Name"
+                    android:text="@string/people_name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/grey_90" />
 
@@ -56,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:layout_marginEnd="@dimen/spacing_middle"
-                    android:layout_marginRight="@dimen/spacing_middle"
                     android:maxLines="2"
 
 

@@ -61,6 +61,6 @@
             android:layout_gravity="right"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_weight="1"
-            android:text="Chat" />
+            android:text="@string/chat" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

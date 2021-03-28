@@ -104,14 +104,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
-            android:text="No Notification or Quotes"
+            android:text="@string/no_notification_or_quotes"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="@color/grey_90" />
         <Button
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"/>
+            android:text="@string/login"/>
 
     </LinearLayout>
 

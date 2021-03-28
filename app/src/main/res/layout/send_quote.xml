@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="Request Details" />
+                android:text="@string/request_details" />
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="Variety"
+                            android:hint="@string/variety"
                             android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +96,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="Quantity"
+                            android:hint="@string/quantity"
                             android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="Grade"
+                            android:hint="@string/grade"
                             android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,7 +133,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="Date sent"
+                            android:hint="@string/date_sent"
                             android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </TableRow>
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="Write your Quote"/>
+                android:text="@string/write_your_quote"/>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -166,7 +166,7 @@
                             android:id="@+id/quantitySupply"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Quantity you can supply"
+                            android:hint="@string/quantity_you_can_supply"
                             android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -180,7 +180,7 @@
                             android:id="@+id/price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Price"
+                            android:hint="@string/price"
                             android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -197,7 +197,7 @@
                     android:id="@+id/supplyDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Supply Details"
+                    android:hint="@string/supply_details"
                     android:inputType="textUri|textShortMessage|textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -211,7 +211,7 @@
                     android:id="@+id/pickupLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pickup Location" />
+                    android:hint="@string/pickup_location" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -225,14 +225,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:text="Cancel " />
+                    android:text="@string/cancel" />
 
                 <Button
                     android:id="@+id/sendQuote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:text="Send Quote" />
+                    android:text="@string/send_quote" />
             </LinearLayout>
 
             <View

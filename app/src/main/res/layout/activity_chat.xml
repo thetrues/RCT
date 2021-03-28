@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:hint="Write a message..."
+                    android:hint="@string/write_a_message"
                     android:imeOptions="actionSearch"
                     android:inputType="textMultiLine"
                     android:padding="@dimen/spacing_middle" />

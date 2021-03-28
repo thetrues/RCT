@@ -91,7 +91,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Platform Name:" />
+                    android:text="@string/platform_name" />
 
                 <TextView
                     android:id="@+id/platformName"
@@ -110,7 +110,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seller Location:" />
+                    android:text="@string/seller_location" />
 
                 <TextView
                     android:id="@+id/location"
@@ -136,7 +136,7 @@
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Category:" />
+                    android:text="@string/category" />
 
                 <TextView
                     android:id="@+id/category"
@@ -154,7 +154,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Size of Business:" />
+                    android:text="@string/size_of_business" />
 
                 <TextView
                     android:id="@+id/size"
@@ -169,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"
-            android:text="Shop from this seller"
+            android:text="@string/shop_from_this_seller"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

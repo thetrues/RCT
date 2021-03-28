@@ -22,6 +22,7 @@ public class UserPreference {
     private static final String ACTIVE = "active";
     private static final String PHONE = "phone";
     private static final String DIAL_CODE = "code";
+    private static final String ACTIVE_LOCALE = "locale";
     private static final String IS_PASSED = "passed";
 
     public UserPreference(Context context) {
@@ -130,6 +131,15 @@ public class UserPreference {
 
     public void setActive(String active){
         editor.putString(ACTIVE, active);
+        editor.commit();
+    }
+
+    public String getActiveLocale(){
+        return preferences.getString(ACTIVE_LOCALE, "eng");
+    }
+
+    public void setActiveLocale(String locale){
+        editor.putString(ACTIVE_LOCALE, locale);
         editor.commit();
     }
 

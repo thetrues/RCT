@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Give Tender"
+                    android:text="@string/give_tender"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/white" />
 
@@ -73,13 +73,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinnerVariety"
             android:layout_weight="1"
-            app:hintText="Variety"/>
+            app:hintText="@string/variety"/>
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/spinnerGrade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:hintText="Grade"
+                app:hintText="@string/grade"
                 android:layout_weight="1" />
 
 
@@ -102,7 +102,7 @@
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pickup Location" />
+                    android:hint="@string/pickup_location" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -117,7 +117,7 @@
                     android:id="@+id/quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Quantity"
+                    android:hint="@string/quantity"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"
-            android:text="Give Tender"
+            android:text="@string/give_tender"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

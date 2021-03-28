@@ -1,7 +1,10 @@
 package com.rct;
 
 import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.rct.database.UserPreference;
 import com.rct.utils.DataApi;
 
+import java.util.Locale;
+
 public class MainActivity2 extends AppCompatActivity {
     UserPreference userPreference;
     @Override
@@ -23,6 +28,7 @@ public class MainActivity2 extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         userPreference = new UserPreference(this);
+        setLocale(userPreference.getActiveLocale());
         if (!DataApi.ReadPreference("token", "token", getApplicationContext()).isEmpty()){
             //   DataApi.getUserInformation(DataApi.ReadPreference("token", "token", getApplicationContext()), this);
         }
@@ -57,5 +63,18 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
         alert.create().show();
+    }
+
+    public void setLocale(String localeCode){
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        Locale locale = new Locale(localeCode);
+        Locale.setDefault(locale);
+        config = getBaseContext().getResources().getConfiguration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+        userPreference.setActiveLocale(localeCode);
     }
 }

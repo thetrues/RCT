@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Request Tender"
+                    android:text="@string/request_tender"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/white" />
 
@@ -47,7 +47,7 @@
                     android:id="@+id/sendRequest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Request"
+                    android:text="@string/request"
                     android:textAlignment="center"
                     android:textAllCaps="true" />
 
@@ -85,7 +85,7 @@
                         android:id="@+id/quantity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Quantity"
+                        android:hint="@string/quantity"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,18 +99,19 @@
                         android:id="@+id/sellingPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Selling Price" />
+                        android:hint="@string/selling_price" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
@@ -118,7 +119,7 @@
                         android:id="@+id/location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Pickup Location" />
+                        android:hint="@string/pickup_location" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>

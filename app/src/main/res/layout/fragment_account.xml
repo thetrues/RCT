@@ -31,14 +31,14 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You dont have an account please login"
+                android:text="@string/you_dont_have_an_account_please_login"
                 android:textAlignment="center" />
 
             <Button
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login" />
+                android:text="@string/login" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -110,7 +110,7 @@
                             android:id="@+id/names"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kevin John"
+                            android:text="@string/kevin_john"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             android:textColor="@color/colorOnPrimaryDark"
                             app:fontFamily="sans-serif-medium" />
@@ -120,7 +120,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_medium"
-                            android:text="Active"
+                            android:text="@string/active"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorOnPrimaryDark" />
 
@@ -145,14 +145,16 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
+                        android:paddingRight="@dimen/spacing_large"
+                        android:focusable="true">
 
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:tint="@color/colorPrimaryDark"
-                            app:srcCompat="@drawable/ic_baseline_notes" />
+                            app:srcCompat="@drawable/ic_baseline_notes"
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:id="@+id/userType"
@@ -160,7 +162,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_large"
                             android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Buyer"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
@@ -175,14 +176,16 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
+                        android:paddingRight="@dimen/spacing_large"
+                        android:focusable="true">
 
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:tint="@color/colorPrimaryDark"
-                            app:srcCompat="@drawable/ic_baseline_phone" />
+                            app:srcCompat="@drawable/ic_baseline_phone"
+                            android:contentDescription="@string/todo" />
 
                         <TextView
                             android:id="@+id/phone"
@@ -190,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_large"
                             android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Phone"
+                            android:text="@string/phone"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
@@ -207,7 +210,8 @@
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingRight="@dimen/spacing_large"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        android:focusable="true">
 
                         <ImageButton
                             android:layout_width="wrap_content"
@@ -222,7 +226,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_large"
                             android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Statistic"
+                            android:text="@string/statistic"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
@@ -230,6 +234,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/language"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxxlarge"
                         android:background="?attr/selectableItemBackground"
@@ -237,7 +242,8 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
+                        android:paddingRight="@dimen/spacing_large"
+                        android:focusable="true">
 
                         <ImageButton
                             android:layout_width="wrap_content"
@@ -251,7 +257,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_large"
                             android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Language"
+                            android:text="@string/language"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
@@ -266,7 +272,8 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large">
+                        android:paddingRight="@dimen/spacing_large"
+                        android:focusable="true">
 
                         <ImageButton
                             android:layout_width="wrap_content"
@@ -280,7 +287,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_large"
                             android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Logout"
+                            android:text="@string/logout"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />

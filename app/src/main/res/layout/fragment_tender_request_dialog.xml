@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Request Tender"
+                android:text="@string/request_tender"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/white" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_large"
-                android:text="buyerName"
+                android:text="@string/buyername"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -80,6 +80,46 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_large"
                     app:hintText="Select Variety" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <RadioButton
+                            android:id="@+id/isGraded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Is Graded" />
+
+                        <RadioButton
+                            android:id="@+id/isNotGraded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Is not Graded" />
+                    </RadioGroup>
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <RadioButton
+                            android:id="@+id/isCertified"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Batch Certified" />
+
+                        <RadioButton
+                            android:id="@+id/notCertified"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Batch not Certified" />
+                    </RadioGroup>
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,7 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_medium"
-                            android:hint="Quantity"
+                            android:hint="@string/quantity"
                             android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +175,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_medium"
-                            android:hint="Selling Price" />
+                            android:hint="@string/selling_price" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -146,7 +186,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -155,7 +195,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_medium"
-                            android:hint="Pickup Location" />
+                            android:hint="@string/pickup_location" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
@@ -180,7 +220,7 @@
                     android:id="@+id/sendRequest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Request" />
+                    android:text="@string/request" />
             </LinearLayout>
 
 

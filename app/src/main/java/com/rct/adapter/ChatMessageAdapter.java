@@ -1,8 +1,6 @@
 package com.rct.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +49,12 @@ public ChatMessageAdapter(Context mContext, List<ChatModel> chat, UserPreference
     @Override
     public void onBindViewHolder(final ChatMessageAdapter.ViewHolder holder, int position) {
     final ChatModel model = chat.get(position);
-        if (!model.isExpiration_status()){
-            holder.tv_status.setText("Expired");
-            holder.tv_status.setTextColor(Color.RED);
-            Log.d( "onBindViewHolder: ", "expires");
-        }
+//        if (!model.isExpiration_status()){
+//            holder.tv_status.setText("Expired");
+//            holder.tv_status.setTextColor(Color.RED);
+//            Log.d( "onBindViewHolder: ", "expires");
+//        }
+        holder.tv_status.setText(String.valueOf(model.getMessage_count()));
         holder.tv_time.setText(Tools.getUnixToDate(model.getTime()));
         View.OnClickListener listener = view -> onChatMessageClick.OnChatClick(model);
         holder.cv.setOnClickListener(listener);
