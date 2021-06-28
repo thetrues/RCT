@@ -7,30 +7,30 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.rct.pages.HomeFragment"
+        android:name="com.rctapp.pages.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_prices"
-        android:name="com.rct.pages.PricesFragment"
+        android:name="com.rctapp.pages.PricesFragment"
         android:label="Prices"
         tools:layout="@layout/fragment_prices" />
 
     <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.rct.pages.ChatAllFragment"
+        android:name="com.rctapp.pages.ChatAllFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_chat_all" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.rct.pages.NotificationFragment"
+        android:name="com.rctapp.pages.NotificationFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.rct.pages.AccountFragment"
+        android:name="com.rctapp.pages.AccountFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account" />
 </navigation>

@@ -103,7 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_large"
-                            android:text="@string/a_formal_structured_procedure_for_generating_competing_offers_from_different_potential_suppliers_or_contractors_looking_to_obtain_an_award_of_business_activity_in_works_supply" />
+                            android:text="@string/givetenderdetails" />
 
                         <View
                             android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_large"
-                            android:text="@string/a_formal_structured_procedure_for_generating_competing_offers_from_different_potential_suppliers_or_contractors_looking_to_obtain_an_award_of_business_activity_in_works_supply" />
+                            android:text="@string/requesttednderdetails" />
 
                         <View
                             android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_large"
-                            android:text="@string/a_formal_structured_procedure_for_generating_competing_offers_from_different_potential_suppliers_or_contractors_looking_to_obtain_an_award_of_business_activity_in_works_supply" />
+                            android:text="@string/ind_price" />
 
                         <View
                             android:layout_width="match_parent"
@@ -256,52 +256,138 @@
 
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_large"
+                android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_tender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
                 android:text="@string/recent_tender_request"
                 android:textSize="18sp" />
-
+            <TextView
+                android:id="@+id/tv_tender_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recent_tender_sub"/>
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tenderRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tv_seller"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
-                android:text="@string/shop_by_sellers"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tv_seller"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shop_by_sellers"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/tv_seller_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shop_by_seller_sub"/>
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/viewAllSeller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/view_all" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sellersRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tv_buyer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
-                android:text="@string/buyers"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_large"
+                    android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_buyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buyers"
+                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/tv_buyer_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/buyer_sub"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/viewAllBuyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/view_all" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/buyersRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/tv_platform"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_large"
-                android:text="@string/shop_by_cluster"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_large"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_platform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shop_by_cluster"
+                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/tv_platform_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shop_by_cluster_sub"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/viewAllCluster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/view_all" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/platformRecycler"

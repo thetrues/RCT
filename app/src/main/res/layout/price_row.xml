@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Active Price"
+                android:text="@string/indicative_price"
                 android:textAlignment="center"
                 android:textColor="#08AE10" />
         </LinearLayout>

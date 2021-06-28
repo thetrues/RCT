@@ -49,8 +49,8 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/iv_profile2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
 
             android:src="@drawable/user_avatar"
             app:civ_border_color="#F6F7FA"

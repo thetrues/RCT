@@ -6,10 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
-    app:cardElevation="4dp"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="6dp">
+    app:cardElevation="0dp"
+    app:contentPadding="0dp">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -21,21 +19,26 @@
             android:layout_height="wrap_content"
             tools:ignore="UselessParent">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:civ_border_color="#F6F7FA"
+                app:civ_border_width="1dp"
+                app:civ_shadow_radius="1"
                 app:srcCompat="@drawable/user_avatar" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/spacing_medium"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_medium">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
@@ -43,6 +46,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/spacing_medium"
                         android:layout_weight="1"
                         android:textStyle="bold" />
 
@@ -55,7 +59,8 @@
                         android:padding="@dimen/spacing_medium"
                         android:text="0"
                         android:textAlignment="center"
-                        android:textColor="#FBFBFB" />
+                        android:textColor="#FBFBFB"
+                        tools:ignore="RtlCompat" />
 
                 </LinearLayout>
 
@@ -65,6 +70,14 @@
                     android:layout_height="wrap_content"
                     android:text="time"
                     android:textAlignment="textEnd" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:background="@color/colorPrimary" />
 
             </LinearLayout>
         </TableRow>

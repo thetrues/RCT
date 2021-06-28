@@ -4,12 +4,12 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/Theme.RCT"
     app:cardBackgroundColor="@color/colorOnPrimaryDark"
     app:cardCornerRadius="10dp"
-    android:theme="@style/Theme.RCT"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
-    app:contentPadding="10dp">
+    app:contentPadding="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,11 +19,11 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/iv_profile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/user_avatar"
             app:civ_border_color="#F6F7FA"
-            app:civ_border_width="4dp"
+            app:civ_border_width="1dp"
             app:civ_shadow="true"
             app:civ_shadow_color="#FAFAFA"
             app:civ_shadow_radius="10" />
@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:layout_marginBottom="@dimen/spacing_medium"
             android:textAlignment="center" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

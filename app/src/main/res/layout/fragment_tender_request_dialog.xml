@@ -79,69 +79,74 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_large"
-                    app:hintText="Select Variety" />
+                    app:hintText="@string/select_variety" />
+
+
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_it_graded" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/isGraded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/isNotGraded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+                </RadioGroup>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinnerGrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    app:hintText="@string/grade" />
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/is_batch_certified" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <RadioButton
-                            android:id="@+id/isGraded"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Is Graded" />
-
-                        <RadioButton
-                            android:id="@+id/isNotGraded"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Is not Graded" />
-                    </RadioGroup>
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
+                        android:orientation="horizontal">
                         <RadioButton
                             android:id="@+id/isCertified"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Batch Certified" />
+                            android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/notCertified"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Batch not Certified" />
+                            android:text="@string/no" />
                     </RadioGroup>
                 </LinearLayout>
-
-                <LinearLayout
+                <Button
+                    android:id="@+id/addBatchCertification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    android:orientation="horizontal">
-
-
-                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                        android:id="@+id/spinnerGrade"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:hintText="Grade" />
-
-                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                        android:id="@+id/spinnerCertified"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:hintText="Certified?" />
-                </LinearLayout>
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:text="@string/add_batch_certification"
+                    android:textAllCaps="false" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
