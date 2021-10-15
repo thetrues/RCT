@@ -523,6 +523,23 @@ public class DataApi {
         }
         return Sucess;
     }
+
+    public static String getUserData(String userId, UserPreference userPreference) throws IOException {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout (15, TimeUnit.MINUTES) // in seconds
+                .readTimeout(15, TimeUnit.MINUTES)
+                .sslSocketFactory(TrustAllSSL.createSSLSocketFactory())
+                .hostnameVerifier(new TrustAllSSL.TrustAllHostnameVerifier())
+                .build();
+        Request request = new Request.Builder()
+                .url(Api.main_url+"/api/v1/user/information/"+userId)
+                .addHeader("Authorization", "Bearer " + userPreference.getToken())
+                .get()
+                .build();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
+
     public static boolean acceptTender(UserPreference userPreference, String tenderId){
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout (15, TimeUnit.MINUTES) // in seconds

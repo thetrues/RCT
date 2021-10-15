@@ -65,10 +65,10 @@ public class ChatV2 extends AppCompatActivity implements MqttCallback {
         binding.backArrow.setOnClickListener(view -> finish());
         chatModel = (ChatModel) getIntent().getExtras().getSerializable("chatModel");
         if (chatModel.getSeller().equals(userPreference.getUserId()) && !chatModel.getBuyer_image_path().isEmpty()){
-            String imgURL = "http://rctapp.co.tz/rctimages/rct-upload-encoded/" + chatModel.getSeller_image_path();
+            String imgURL = Api.main_plain+"/rctimages/rct-upload-encoded/" + chatModel.getSeller_image_path();
             Tools.displayImageOriginal(getApplication(), binding.image, imgURL);
         }else{
-            String imgURL = "http://rctapp.co.tz/rctimages/rct-upload-encoded/" + chatModel.getBuyer_image_path();
+            String imgURL = Api.main_plain+"/rct-upload-encoded/" + chatModel.getBuyer_image_path();
             Tools.displayImageOriginal(getApplication(), binding.image, imgURL);
         }
         try {

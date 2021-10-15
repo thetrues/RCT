@@ -15,10 +15,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rctapp.adapter.QuotationRecyclerAdapter;
-import com.rctapp.chat.ChatActivity;
+import com.rctapp.chat.FirebaseChat;
 import com.rctapp.database.UserPreference;
 import com.rctapp.databinding.FragmentQouteNotificationBinding;
+import com.rctapp.models.ChatModel;
 import com.rctapp.models.QuoteModel;
 import com.rctapp.utils.Api;
 import com.rctapp.utils.DataApi;
@@ -32,7 +38,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -66,6 +74,7 @@ public class QouteNotification extends Fragment {
     UserPreference userPreference;
     private List<QuoteModel> modelList;
     private QuotationRecyclerAdapter adapter;
+    DatabaseReference mData, mData2;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +87,7 @@ public class QouteNotification extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.quotationRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+
         client = new OkHttpClient.Builder()
                 .connectTimeout (15, TimeUnit.MINUTES) // in seconds
                 .readTimeout(15, TimeUnit.MINUTES)
@@ -122,12 +132,41 @@ public class QouteNotification extends Fragment {
                         adapter = new QuotationRecyclerAdapter(getActivity(), modelList);
                         binding.quotationRecycler.setAdapter(adapter);
                         adapter.setOnQuoteClick(model -> {
+
                             if(model.getActive() == 2) {
                                 GotToChat(model);
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setMessage("Initiate Chat?");
                                 builder.setPositiveButton("Initiate", (dialogInterface, i) -> {
+                                    String sellerData = null;
+                                    try {
+                                        sellerData = DataApi.getUserData(model.getSeller_id(), userPreference);
+                                    JSONObject u = new JSONObject(sellerData);
+                                    JSONObject ui = u.getJSONObject("data");
+                                    JSONObject uui = ui.getJSONObject("user");
+                                    Map<String, Object> chat = new HashMap<>();
+                                    chat.put("seller_id", model.getSeller_id());
+                                    chat.put("seller",  uui.getString("name"));
+                                    chat.put("seller_image_path",  ui.getString("profile_image_path"));
+                                    chat.put("buyer_id", userPreference.getUserId());
+                                    chat.put("buyer", userPreference.getName());
+                                    chat.put("buyer_image_path", userPreference.getImage());
+                                    chat.put("message_count", 0);
+                                    chat.put("quote_id", model.getId());
+                                    chat.put("supply_quantity", model.getSupply_quantity());
+                                    chat.put("supply_price", model.getSupply_price());
+                                    chat.put("supply_details", model.getSupply_details());
+                                    chat.put("chat_status", true);
+                                    chat.put("expiration_status", true);
+                                    chat.put("update_time", System.currentTimeMillis());
+                                    mData = FirebaseDatabase.getInstance().getReference().child("messenger").child(userPreference.getUserId()).child(model.getId());
+                                    mData2 = FirebaseDatabase.getInstance().getReference().child("messenger").child(model.getSeller_id()).child(model.getId());
+                                    mData.setValue(chat);
+                                    mData2.setValue(chat);
+                                    } catch (IOException | JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     JSONObject ob = new JSONObject();
                                     try {
                                         ob.put("seller_id", model.getSeller_id());
@@ -215,14 +254,27 @@ public class QouteNotification extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Quotation Accepted");
         builder.setMessage(model.getSupply_details());
-        builder.setPositiveButton("Go to chat", (dialogInterface, i) -> {
-            Intent s = new Intent(getContext(), ChatActivity.class);
-            s.putExtra("id", model.getId());
-            s.putExtra("name", model.getSupply_details());
-            startActivity(s);
-        }).setNegativeButton("Not now", (dialogInterface, i) -> {
+            mData = FirebaseDatabase.getInstance().getReference().child("messenger").child(userPreference.getUserId()).child(model.getId());
+            mData.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    builder.setPositiveButton("Go to chat", (dialogInterface, i) -> {
+                    ChatModel chatModel = snapshot.getValue(ChatModel.class);
+                        Intent s = new Intent(getContext(), FirebaseChat.class);
+                        s.putExtra("chatModel", chatModel);
+                        startActivity(s);
+                    }).setNegativeButton("Not now", (dialogInterface, i) -> {
 
-        });
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
         builder.create().show();
     }
 }

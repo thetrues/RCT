@@ -3,36 +3,28 @@ package com.rctapp.models;
 import java.io.Serializable;
 
 public class ChatModel implements Serializable {
-    String messengerId, messenger_id, seller_id, quote_id, buyer, seller;
+    String  messenger_id, seller_id, quote_id, buyer, buyer_id, seller;
     boolean chat_status, expiration_status;
     int message_count;
     String buyer_image_path, seller_image_path;
-    long time;
+    long update_time;
 
     public ChatModel() {
     }
 
-    public ChatModel(String messengerId, String messenger_id, String seller_id, String quote_id, String buyer, String seller, boolean chat_status, boolean expiration_status, int message_count, String buyer_image_path, String seller_image_path, long time) {
-        this.messengerId = messengerId;
+    public ChatModel(String messenger_id, String seller_id, String quote_id, String buyer, String buyer_id, String seller, boolean chat_status, boolean expiration_status, int message_count, String buyer_image_path, String seller_image_path, long update_time) {
         this.messenger_id = messenger_id;
         this.seller_id = seller_id;
         this.quote_id = quote_id;
         this.buyer = buyer;
+        this.buyer_id = buyer_id;
         this.seller = seller;
         this.chat_status = chat_status;
         this.expiration_status = expiration_status;
         this.message_count = message_count;
         this.buyer_image_path = buyer_image_path;
         this.seller_image_path = seller_image_path;
-        this.time = time;
-    }
-
-    public String getMessengerId() {
-        return messengerId;
-    }
-
-    public void setMessengerId(String messengerId) {
-        this.messengerId = messengerId;
+        this.update_time = update_time;
     }
 
     public String getMessenger_id() {
@@ -65,6 +57,14 @@ public class ChatModel implements Serializable {
 
     public void setBuyer(String buyer) {
         this.buyer = buyer;
+    }
+
+    public String getBuyer_id() {
+        return buyer_id;
+    }
+
+    public void setBuyer_id(String buyer_id) {
+        this.buyer_id = buyer_id;
     }
 
     public String getSeller() {
@@ -115,29 +115,29 @@ public class ChatModel implements Serializable {
         this.seller_image_path = seller_image_path;
     }
 
-    public long getTime() {
-        return time;
+    public long getUpdate_time() {
+        return update_time;
     }
 
-    public void setTime(long time) {
-        this.time = time;
+    public void setUpdate_time(long update_time) {
+        this.update_time = update_time;
     }
 
     @Override
     public String toString() {
         return "ChatModel{" +
-                "messengerId='" + messengerId + '\'' +
-                ", messenger_id='" + messenger_id + '\'' +
+                "messenger_id='" + messenger_id + '\'' +
                 ", seller_id='" + seller_id + '\'' +
                 ", quote_id='" + quote_id + '\'' +
                 ", buyer='" + buyer + '\'' +
+                ", buyer_id='" + buyer_id + '\'' +
                 ", seller='" + seller + '\'' +
                 ", chat_status=" + chat_status +
                 ", expiration_status=" + expiration_status +
                 ", message_count=" + message_count +
                 ", buyer_image_path='" + buyer_image_path + '\'' +
                 ", seller_image_path='" + seller_image_path + '\'' +
-                ", time=" + time +
+                ", update_time=" + update_time +
                 '}';
     }
 }

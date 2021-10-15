@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RCT"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChatListActivity"/>
+        <activity android:name=".chat.FirebaseChat"></activity>
+        <activity android:name=".ChatListActivity" />
         <activity android:name=".SellersByVarietyActivity" />
         <activity android:name=".ClustersActivity" />
         <activity android:name=".BuyersActivity" />

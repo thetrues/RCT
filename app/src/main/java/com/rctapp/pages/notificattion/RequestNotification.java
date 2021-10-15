@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.rctapp.R;
 import com.rctapp.adapter.NotificationRecyclerAdapter;
 import com.rctapp.chat.ChatActivity;
@@ -36,7 +38,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -76,6 +80,7 @@ public class RequestNotification extends Fragment {
     private List<NotificationModel> model;
     private OkHttpClient client;
     private UserPreference userPreference;
+    private DatabaseReference mData, mData2;
     private GoChat goChat;
 
     @Override
@@ -169,6 +174,33 @@ public class RequestNotification extends Fragment {
         ((TextView) rq.findViewById(R.id.details)).setText(model.getExtra_details());
         al.setPositiveButton("Chat with Seller", (dialogInterface, i) -> {
             if (userPreference.getBuyer() && userPreference.getRole().toLowerCase().equals("buyer")) {
+                try {
+                    String sellerData = DataApi.getUserData(model.getSeller_id(), userPreference);
+                    JSONObject u = new JSONObject(sellerData);
+                    JSONObject ui = u.getJSONObject("data");
+                    JSONObject uui = ui.getJSONObject("user");
+                Map<String, Object> chat = new HashMap<>();
+                chat.put("seller_id", model.getSeller_id());
+                chat.put("seller",  uui.getString("name"));
+                chat.put("seller_image_path",  ui.getString("profile_image_path"));
+                chat.put("buyer_id", userPreference.getUserId());
+                chat.put("buyer", userPreference.getName());
+                chat.put("buyer_image_path", userPreference.getImage());
+                chat.put("message_count", 0);
+                chat.put("quote_id", model.getId());
+                chat.put("supply_quantity", model.getQuantity());
+                chat.put("supply_price", model.getSelling_price());
+                chat.put("supply_details", model.getExtra_details());
+                chat.put("chat_status", true);
+                chat.put("expiration_status", true);
+                chat.put("update_time", System.currentTimeMillis());
+               mData = FirebaseDatabase.getInstance().getReference().child("messenger").child(userPreference.getUserId()).child(model.getId());
+               mData2 = FirebaseDatabase.getInstance().getReference().child("messenger").child(model.getSeller_id()).child(model.getId());
+              mData.setValue(chat);
+              mData2.setValue(chat);
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
                 JSONObject ob = new JSONObject();
                 try {
                     ob.put("seller_id", model.getSeller_id());

@@ -26,6 +26,7 @@ public class UserPreference {
     private static final String IS_PASSED = "passed";
     private static final String IMAGE = "image";
 
+
     public UserPreference(Context context) {
         this.mContext = context;
         preferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);

@@ -99,7 +99,7 @@ public class AccountFragment extends Fragment {
             binding.loginCard.setVisibility(View.VISIBLE);
         }else{
             if (!userPreference.getImage().isEmpty()){
-                String imgURL = Api.main_url+"/rctimages/rct-upload-encoded/" + userPreference.getImage();
+                String imgURL = Api.main_plain+"/rctimages/rct-upload-encoded/" + userPreference.getImage();
                 Tools.displayImageOriginal(getActivity(), binding.ivProfile, imgURL);
                 Log.d("onViewCreated: ", imgURL);
             }else{

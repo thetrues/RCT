@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.rctapp.adapter.CountrySpinnerAdapter;
 import com.rctapp.database.UserPreference;
 import com.rctapp.databinding.ActivityAuthBinding;
@@ -51,14 +54,17 @@ public class Auth extends AppCompatActivity {
     Boolean waite_otp = false;
     long waiting_time;
     UserPreference userPreference;
+    FirebaseAuth mAuth;
+    DatabaseReference mData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         binding = ActivityAuthBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         userPreference = new UserPreference(this);
         Tools.NetPolicy();
-        client =new OkHttpClient.Builder()
+        client = new OkHttpClient.Builder()
                 .connectTimeout (15, TimeUnit.MINUTES) // in seconds
                 .readTimeout(15, TimeUnit.MINUTES)
                 .sslSocketFactory(TrustAllSSL.createSSLSocketFactory())
@@ -430,6 +436,20 @@ public class Auth extends AppCompatActivity {
             }
 
         }
+      //  firebaseAuth(token);
         startActivity(new Intent(getApplicationContext(), MainActivity2.class));
+    }
+
+    public void firebaseAuth(String token){
+        mAuth.signInWithCustomToken(token)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()){
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Log.d("onComplete: " , user.getUid());
+                    }else{
+                        Log.d("onComplete: ", task.getException().toString());
+                        Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

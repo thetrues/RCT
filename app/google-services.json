@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "556877453862",
+    "firebase_url": "https://rctapp-7a7c5-default-rtdb.firebaseio.com",
+    "project_id": "rctapp-7a7c5",
+    "storage_bucket": "rctapp-7a7c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556877453862:android:7f9715e9460226b7e364e7",
+        "android_client_info": {
+          "package_name": "com.rctapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556877453862-ag3hrl27s76mp7dchdhson4mp44lll18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rctapp",
+            "certificate_hash": "b46656d23c43f2d2ed872b9bd094a07242946965"
+          }
+        },
+        {
+          "client_id": "556877453862-84jg39ikln2aanphnb5dnq0ns4kcg4t8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAo6BFmPuShyXSmGIGozTrXJETBX-Rtuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556877453862-84jg39ikln2aanphnb5dnq0ns4kcg4t8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

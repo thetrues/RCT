@@ -15,8 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rctapp.adapter.ChatMessageAdapter;
-import com.rctapp.chat.ChatV2;
+import com.rctapp.chat.FirebaseChat;
 import com.rctapp.database.UserPreference;
 import com.rctapp.databinding.FragmentChatAllBinding;
 import com.rctapp.models.ChatModel;
@@ -98,11 +103,45 @@ public class ChatAllFragment extends Fragment {
         binding.chatRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
         if (userPreference.getLoggedIn()) {
-            getMessages();
+            //getMessages();
+            getFiremsg();
         }else{
             binding.noMessages.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    public void getFiremsg(){
+        DatabaseReference mData = FirebaseDatabase.getInstance().getReference().child("messenger").child(userPreference.getUserId());
+        mData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long num = snapshot.getChildrenCount();
+                if (num==0){
+                    binding.noMessages.setVisibility(View.VISIBLE);
+                }else {
+                    binding.noMessages.setVisibility(View.GONE);
+                }
+                for (DataSnapshot d: snapshot.getChildren()) {
+                    ChatModel model = d.getValue(ChatModel.class);
+                    chatModelList.add(model);
+                }
+                Log.d( "onDataChange: ", chatModelList.toString());
+                Collections.reverse(chatModelList);
+                adapter = new ChatMessageAdapter(getActivity(), chatModelList, userPreference);
+                binding.chatRecycler.setAdapter(adapter);
+                adapter.setOnChatMessageClick(chatModel -> {
+                    Intent i = new Intent(getContext(), FirebaseChat.class);
+                    i.putExtra("chatModel", chatModel);
+                    startActivity(i);
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void getMessages(){
@@ -134,25 +173,29 @@ public class ChatAllFragment extends Fragment {
                         Log.d( "onResponse: ", data);
                         JSONObject object = new JSONObject(data);
                         JSONArray array = object.getJSONArray("data");
-                        if (array.length()==0){
-                            binding.noMessages.setVisibility(View.VISIBLE);
-                        }else {
-                            binding.noMessages.setVisibility(View.GONE);
-                        }
+
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject o = array.getJSONObject(i);
-                            chatModelList.add(new ChatModel(o.getString("messengerId"), o.getString("messenger_id"),
-                                    o.getString("seller_id"), o.getString("quote_id"), o.getString("buyer"), o.getString("seller"), o.getBoolean("chat_status"),
-                                    o.getBoolean("expiration_status"), o.getInt("message_count"), o.getString("buyer_image_path"), o.getString("seller_image_path"), Long.parseLong( o.getString("updated_time"))));
+//                            chatModelList.add(new ChatModel(o.getString("messengerId"), o.getString("messenger_id"),
+//                                    o.getString("seller_id"), o.getString("quote_id"), o.getString("buyer"), o.getString("seller"),
+//                                    o.getBoolean("chat_status"),
+//                                    o.getBoolean("expiration_status"), o.getInt("message_count"), o.getString("buyer_image_path"),
+//                                    o.getString("seller_image_path"), Long.parseLong(o.getString("updated_time"))));
+                           DatabaseReference mData = FirebaseDatabase.getInstance().getReference().child("messenger").child(userPreference.getUserId()).child(o.getString("quote_id"));
+                            mData.child("messenger_id").setValue(o.getString("messenger_id"));
+                            mData.child("buyer_id").setValue(o.getString("messenger_id"));
+                            mData.child("seller_id").setValue(o.getString("seller_id"));
+                            mData.child("quote_id").setValue( o.getString("quote_id"));
+                            mData.child("buyer").setValue(o.getString("buyer"));
+                            mData.child("seller").setValue(o.getString("seller"));
+                            mData.child("seller_image_path").setValue(o.getString("seller_image_path"));
+                            mData.child("chat_status").setValue(o.getBoolean("chat_status"));
+                            mData.child("expiration_status").setValue( o.getBoolean("expiration_status"));
+                            mData.child("message_count").setValue(o.getInt("message_count"));
+                            mData.child("buyer_image_path").setValue(o.getString("buyer_image_path"));
+                            mData.child("update_time").setValue(Long.parseLong(o.getString("updated_time")));
                         }
-                Collections.reverse(chatModelList);
-                adapter = new ChatMessageAdapter(getActivity(), chatModelList, userPreference);
-                binding.chatRecycler.setAdapter(adapter);
-                adapter.setOnChatMessageClick(chatModel -> {
-                    Intent i = new Intent(getContext(), ChatV2.class);
-                    i.putExtra("chatModel", chatModel);
-                    startActivity(i);
-                });
+
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }

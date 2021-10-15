@@ -18,6 +18,7 @@ import com.rctapp.utils.Tools;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -56,10 +57,13 @@ public ChatMessageAdapter(Context mContext, List<ChatModel> chat, UserPreference
 //        }
 
         holder.tv_status.setText(String.valueOf(model.getMessage_count()));
+         Pattern pattern = Pattern.compile("[-]");
+         String[] result = pattern.split(model.getQuote_id());
+         holder.tv_quote.setText(String.format("Quote: %s", result[0]));
         if (model.getMessage_count() == 0){
             holder.tv_status.setVisibility(View.GONE);
         }
-        holder.tv_time.setText(Tools.getUnixToDate(model.getTime()));
+        holder.tv_time.setText(Tools.getUnixToDate(model.getUpdate_time()));
         View.OnClickListener listener = view -> onChatMessageClick.OnChatClick(model);
         holder.cv.setOnClickListener(listener);
           /*  if (userPreference.getUserId().equals(model.getSeller_id())){
@@ -68,13 +72,13 @@ public ChatMessageAdapter(Context mContext, List<ChatModel> chat, UserPreference
                if (userPreference.getSeller()){
                    holder.tv_name.setText(model.getBuyer());
                    if (!model.getBuyer_image_path().isEmpty()) {
-                       String imgURL = "http://142.93.210.105/rctimages/rct-upload-encoded/" + model.getBuyer_image_path();
+                       String imgURL = Api.main_plain+"/rctimages/rct-upload-encoded/" + model.getBuyer_image_path();
                        Tools.displayImageOriginal(mContext, holder.iv_image, imgURL);
                    }
                }else{
                    holder.tv_name.setText(model.getSeller());
                    if (!model.getBuyer_image_path().isEmpty()) {
-                       String imgURL = "http://142.93.210.105/rctimages/rct-upload-encoded/" + model.getSeller_image_path();
+                       String imgURL = Api.main_plain+"/rctimages/rct-upload-encoded/" + model.getSeller_image_path();
                        Tools.displayImageOriginal(mContext, holder.iv_image, imgURL);
                    }
                }
@@ -89,7 +93,7 @@ public ChatMessageAdapter(Context mContext, List<ChatModel> chat, UserPreference
 
 public class ViewHolder extends RecyclerView.ViewHolder{
 
-    protected TextView tv_name, tv_status, tv_time;
+    protected TextView tv_name, tv_status, tv_time, tv_quote;
     protected ImageView iv_image;
     protected View cv;
 
@@ -99,6 +103,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         this.tv_status = view.findViewById(R.id.status);
         this.tv_time = view.findViewById(R.id.time);
         this.iv_image = view.findViewById(R.id.iv_profile);
+        this.tv_quote = view.findViewById(R.id.quote);
         this.cv = view.findViewById(R.id.cv_card);
 
     }

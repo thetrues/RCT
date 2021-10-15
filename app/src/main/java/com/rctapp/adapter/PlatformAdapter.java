@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rctapp.R;
 import com.rctapp.models.PlatformModel;
+import com.rctapp.utils.Api;
 import com.rctapp.utils.Tools;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class PlatformAdapter extends RecyclerView.Adapter<PlatformAdapter.ViewHo
         holder.tv_name.setText(model.getPlatform_name());
         holder.tv_member.setText(String.format("%s Member", model.getNumber_of_member()));
         if (!model.getImage_path().isEmpty()) {
-            String imgURL = "https://rctapp.co.tz/rctimages/rct-upload-encoded/" + model.getImage_path();
+            String imgURL = Api.main_plain+"/rctimages/rct-upload-encoded/" + model.getImage_path();
             Log.d("onBindViewHolder: ", imgURL);
             Tools.displayImageOriginal(mContext, holder.iv_image, imgURL);
         }

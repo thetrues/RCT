@@ -3,6 +3,7 @@ package com.rctapp.utils;
 public class Api {
    // public static final String main_url = "http://142.93.210.105:1122";
     public static final String main_url = "https://rctapp.co.tz:1122";
+    public static final String main_plain = "https://rctapp.co.tz";
     public static final String platforms = "/api/v1/platform/offset/0";
     public static final String sellers = "/api/v1/seller/offset/0";
     public static final String get_seller_by_platform_id = "/api/v1/seller/platform/";
